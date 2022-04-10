@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".GeofenceActivity">
+
+    <Button
+        android:id="@+id/buttonMap"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Map"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/buttonNext"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/switchLeavingGeo" />
+
+    <Button
+        android:id="@+id/buttonNext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:text="Next"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/buttonMap"
+        app:layout_constraintTop_toBottomOf="@+id/switchLeavingGeo"
+        app:layout_constraintVertical_bias="0.9" />
+
+    <EditText
+        android:id="@+id/editTextPhoneNumber"
+        android:layout_width="409dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Phone Number"
+        android:inputType="numberSigned"
+        app:layout_constraintBottom_toTopOf="@+id/editTextEnterGeo"
+        app:layout_constraintStart_toStartOf="@+id/editTextEnterGeo"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
+
+    <EditText
+        android:id="@+id/editTextTextPersonName"
+        android:layout_width="409dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name"
+        android:textColor="#808080"
+        app:layout_constraintBottom_toTopOf="@+id/editTextPhoneNumber"
+        app:layout_constraintStart_toStartOf="@+id/editTextPhoneNumber"
+        app:layout_constraintTop_toBottomOf="@+id/textViewNewGeoTitle" />
+
+    <EditText
+        android:id="@+id/editTextTextLeaveGeo"
+        android:layout_width="409dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:gravity="start|top"
+        android:hint="Leaving Message"
+        android:inputType="textMultiLine"
+        app:layout_constraintBottom_toTopOf="@+id/switchRepeating"
+        app:layout_constraintStart_toStartOf="@+id/switchRepeating"
+        app:layout_constraintTop_toBottomOf="@+id/editTextEnterGeo" />
+
+    <EditText
+        android:id="@+id/editTextEnterGeo"
+        android:layout_width="409dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:gravity="start|top"
+        android:hint="Entering Message"
+        android:inputType="textMultiLine"
+        app:layout_constraintBottom_toTopOf="@+id/editTextTextLeaveGeo"
+        app:layout_constraintStart_toStartOf="@+id/editTextTextLeaveGeo"
+        app:layout_constraintTop_toBottomOf="@+id/editTextPhoneNumber" />
+
+    <Switch
+        android:id="@+id/switchLeavingGeo"
+        android:layout_width="409dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="124dp"
+        android:text="Leaving Geofence"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="1dp" />
+
+    <Switch
+        android:id="@+id/switchRepeating"
+        android:layout_width="409dp"
+        android:layout_height="wrap_content"
+        android:text="Repeating"
+        app:layout_constraintBottom_toTopOf="@+id/switchEnteringGeo"
+        app:layout_constraintStart_toStartOf="@+id/switchEnteringGeo"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextLeaveGeo" />
+
+    <Switch
+        android:id="@+id/switchEnteringGeo"
+        android:layout_width="409dp"
+        android:layout_height="wrap_content"
+        android:text="Entering Geofence"
+        app:layout_constraintBottom_toTopOf="@+id/switchLeavingGeo"
+        app:layout_constraintStart_toStartOf="@+id/switchLeavingGeo"
+        app:layout_constraintTop_toBottomOf="@+id/switchRepeating" />
+
+    <TextView
+        android:id="@+id/textViewNewGeoTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Geofence"
+        android:textColor="#2196F3"
+        android:textSize="36sp"
+        app:layout_constraintBottom_toTopOf="@+id/editTextTextPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
