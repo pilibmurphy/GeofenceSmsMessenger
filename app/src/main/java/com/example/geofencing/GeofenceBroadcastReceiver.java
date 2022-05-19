@@ -10,9 +10,15 @@ import android.util.Log;
 import android.widget.Toast;
 import android.telephony.SmsManager;
 
+import com.example.geofencing.util.jsonUtils;
 import com.google.android.gms.location.Geofence;
 import com.google.android.gms.location.GeofencingEvent;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.io.File;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
 
 import androidx.core.content.ContextCompat;
@@ -21,9 +27,13 @@ public class GeofenceBroadcastReceiver extends BroadcastReceiver {
 
     private static final String TAG = "BroadcastReceiver";
 
+    //This might help with viewing all the active ones.
+    //List<ResolveInfo> receivers = getPackageManager().queryBroadcastReceivers(new Intent("android.provider.Telephony.SMS_RECEIVED"), 0);
+    //https://stackoverflow.com/questions/25262875/get-all-registered-broadcastreceivers-for-received-sms
+
     @Override
     public void onReceive(Context context, Intent intent) {
-        Log.d(TAG, "bcReceiver is working");
+        Log.e(TAG, "bcReceiver is working");
 
         NotificationHelper notificationHelper = new NotificationHelper(context);
 
@@ -33,14 +43,59 @@ public class GeofenceBroadcastReceiver extends BroadcastReceiver {
             Log.d(TAG, "onReceive: Error receiving geofence event...");
             return;
         }
-
+        String testid = "";
         List<Geofence> geofenceList = geofencingEvent.getTriggeringGeofences();
         for (Geofence geofence: geofenceList) {
-            Log.d(TAG, "onReceive: " + geofence.getRequestId());
+            Log.e(TAG, "onReceive: " + geofence.getRequestId());
+            Log.e(TAG, "fenceid: " + geofence.getRequestId());
+            testid = geofence.getRequestId();
         }
-        Location location = geofencingEvent.getTriggeringLocation();
 
-        //todo reintroduce different transition types
+        // Can i use this for anything cool?
+        //Location location = geofencingEvent.getTriggeringLocation();
+
+        File fileJson = new File(context.getExternalFilesDir("/app"), "app.json");
+        Gson gson = new Gson();
+
+        if (fileJson.exists()) {
+            String jsonString = null;
+            try {
+                jsonString = jsonUtils.getStringFromFile(fileJson.toString());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            Type geofenceDetails = new TypeToken<ArrayList<GeofenceDetails>>() {}.getType();
+            ArrayList<GeofenceDetails> geofences = gson.fromJson(jsonString, geofenceDetails);
+            boolean removed = false;
+            for(GeofenceDetails geof : geofences) {
+                if(geof.getFenceId().equals(testid)) {
+
+                    SmsManager smsManager = SmsManager.getDefault();
+                    if (ContextCompat.checkSelfPermission(context, Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED){
+                        sendText(context, geof);
+                    }
+
+                    notificationHelper.sendHighPriorityNotification("Attempting text: " + geof.getName(), "", MapsActivity.class);
+                    if(!geof.isRepeating()){
+                        geofences.remove(geof);
+                        //context.unregisterReceiver(mReceiver);
+                        removed = true;
+                    }
+                }
+            }
+
+            //  rewrite the file without the deleted geofence.
+            if (removed){
+                jsonString = gson.toJson(geofences);
+                jsonUtils.writeJsonFile(fileJson, jsonString);
+            }
+
+        } else {
+            Log.e(TAG, "This is awkward... ");
+        }
+
+
+        //todo reintroduce the different transitionTypes and not just the entering
         //int transitionType = geofencingEvent.getGeofenceTransition();
 /*
         switch (transitionType) {
@@ -59,35 +114,32 @@ public class GeofenceBroadcastReceiver extends BroadcastReceiver {
         }*/
 
 
-        notificationHelper.sendHighPriorityNotification("Attempting to send Text Message", "", MapsActivity.class);
-        SmsManager smsManager = SmsManager.getDefault();
-        if (ContextCompat.checkSelfPermission(context, Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED){
-            Toast.makeText(context, "Sending Text message", Toast.LENGTH_SHORT).show();
-            //smsManager.sendTextMessage("+123456789", null, "hello", null, null);
-            //sendText();
-        }
+        //notificationHelper.sendHighPriorityNotification("Attempting to send Text Message", "", MapsActivity.class);
     }
 
-    private void sendText(Context context, int RequestId){
-        //todo hardcoded string, create input and store on file
-        //  get the requestID that will be on file and get the related number and message
+    //todo - use notification rather than toasts as the application might not be open.
+    //      infact I think they might cause an error?
+    private void sendText(Context context, GeofenceDetails geof){
 
-        String phoneNo = "+123456789";
-        String messageText = "in dublin now";
+        String phoneNo = geof.getPhoneNumber();
+        String messageText = geof.getEnterMessage();
         try {
             SmsManager smsManager = SmsManager.getDefault();
             smsManager.sendTextMessage(phoneNo, null, messageText, null, null);
-            Toast.makeText(context, "SMS Sent Successfully!",
-                    Toast.LENGTH_LONG).show();
+            //Toast.makeText(context, "SMS Sent Successfully!", Toast.LENGTH_LONG).show();
         }catch (Exception e){
-
-            Toast.makeText(context,
-                    "SMS failed, please try again later ! ",
-                    Toast.LENGTH_LONG).show();
+            //Toast.makeText(context, "SMS failed, please try again later ! ", Toast.LENGTH_LONG).show();
             Log.e("Error", e.getLocalizedMessage());
             e.printStackTrace();
-
         }
     }
 
 }
+
+    /*
+        It is better to let single BroadcastReceiver handle single event (SOLID principle).
+        However, you can register several receivers, each receiving different event.
+        There is another problem in your code - BroadcastReceiver is running on main thread and Android suppose that code in BroadcastReceiver will finish very fast.
+        You should not do any long running actions (writing to database) in it. Instead,
+        get received data and start IntentService for processing that data by passing received values via Intent
+    */

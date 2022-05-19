@@ -16,6 +16,7 @@ import com.google.gson.reflect.TypeToken;
 
 import java.io.File;
 import java.lang.reflect.Type;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -44,9 +45,7 @@ public class GeofenceActivity extends AppCompatActivity {
 
     private void save() throws Exception {
 
-        //User inputs details for the geofence and they are then saved to file.
-        //geofence on file and real geofences are connected by the fence id created in maps activity
-        //todo - needs to be tested and error management
+        //todo - ensure no empty strings and other common errors.
 
         GeofenceDetails newGeofence = new GeofenceDetails(fenceID);
         newGeofence.setName(et_name.getText().toString());
@@ -58,8 +57,6 @@ public class GeofenceActivity extends AppCompatActivity {
         newGeofence.setEntering(s_entering.isChecked());
         newGeofence.setRepeating(s_repeating.isChecked());
 
-        // todo get the details form the screen
-
         File fileJson = new File(getApplicationContext().getExternalFilesDir("/app"), "app.json");
         //fileJson.delete();
         Gson gson = new Gson();
@@ -70,20 +67,40 @@ public class GeofenceActivity extends AppCompatActivity {
             geofences.add(newGeofence);
             String jsonString = gson.toJson(geofences);
             jsonUtils.writeJsonFile(fileJson, jsonString);
-            jsonString = jsonUtils.getStringFromFile(fileJson.toString());
-            Log.e(TAG, "first input into file: " +jsonString);
+            //jsonString = jsonUtils.getStringFromFile(fileJson.toString());
+            //Log.e(TAG, "first input into file: " +jsonString);
 
         } else {
             Log.e(TAG, "file exist, appending");
+            Log.e(TAG, "b1");
+
+
+            //file.tostring ins't getting the content, only the directory
+            Log.e(TAG, "file content:" + fileJson.toString());
+
             String jsonString = jsonUtils.getStringFromFile(fileJson.toString());
             Type geofenceDetails = new TypeToken<ArrayList<GeofenceDetails>>() {}.getType();
-            ArrayList<GeofenceDetails> geofences = gson.fromJson(jsonString, geofenceDetails);
+            Log.e(TAG, "e1");
 
-            geofences.add(newGeofence);
-            jsonString = gson.toJson(geofences);
-            jsonUtils.writeJsonFile(fileJson, jsonString);
-            jsonString = jsonUtils.getStringFromFile(fileJson.toString());
-            Log.e(TAG, "new addition to array: " +jsonString);
+            try{
+                ArrayList<GeofenceDetails> geofences = gson.fromJson(jsonString, geofenceDetails);
+                Log.e(TAG, "e2");
+                geofences.add(newGeofence);
+
+                jsonString = gson.toJson(geofences);
+                jsonUtils.writeJsonFile(fileJson, jsonString);
+            }catch (Exception e){
+                Log.e(TAG, "e3");
+                Log.e(TAG, "Empty File");
+                List<GeofenceDetails> geofences = new ArrayList<>();
+                geofences.add(newGeofence);
+                jsonString = gson.toJson(geofences);
+                //this will just repalce what is in the file.
+                jsonUtils.writeJsonFile(fileJson, jsonString);
+            }
+
+            //jsonString = jsonUtils.getStringFromFile(fileJson.toString());
+            //Log.e(TAG, "new addition to array: " +jsonString);
         }
     }
 

@@ -10,7 +10,29 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9f540606-7a1c-4b24-80ce-f9f3f37a87c6" name="Default Changelist" comment="" />
+    <list default="true" id="9f540606-7a1c-4b24-80ce-f9f3f37a87c6" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.gradle/5.6.4/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.6.4/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.6.4/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.6.4/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.6.4/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.6.4/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.6.4/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.6.4/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.6.4/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.6.4/fileHashes/resourceHashesCache.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.6.4/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.6.4/javaCompile/classAnalysis.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.6.4/javaCompile/jarAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.6.4/javaCompile/jarAnalysis.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.6.4/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.6.4/javaCompile/javaCompile.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.6.4/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.6.4/javaCompile/taskHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/geofencing/GeofenceActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/geofencing/GeofenceActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/geofencing/GeofenceBroadcastReceiver.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/geofencing/GeofenceBroadcastReceiver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/geofencing/GeofenceDetails.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/geofencing/GeofenceDetails.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/geofencing/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/geofencing/MainActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/geofencing/MapsActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/geofencing/MapsActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_maps.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_maps.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_new_geofence.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_new_geofence.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -42,7 +64,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../geotest/GeofenceSmsMessenger" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RecentsManager">
@@ -53,10 +75,67 @@
       <recent name="com.example.geofencing" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Android App.MainActivity">
     <configuration default="true" type="AndroidJUnit" factoryName="Android JUnit">
       <option name="TEST_OBJECT" value="class" />
       <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <method v="2">
+        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MainActivity" type="AndroidRunConfigurationType" factoryName="Android App" activateToolWindowBeforeRun="false" temporary="true">
+      <module name="Geofencing.app" />
+      <option name="DEPLOY" value="true" />
+      <option name="DEPLOY_APK_FROM_BUNDLE" value="false" />
+      <option name="DEPLOY_AS_INSTANT" value="false" />
+      <option name="ARTIFACT_NAME" value="" />
+      <option name="PM_INSTALL_OPTIONS" value="" />
+      <option name="ALL_USERS" value="false" />
+      <option name="DYNAMIC_FEATURES_DISABLED_LIST" value="" />
+      <option name="ACTIVITY_EXTRA_FLAGS" value="" />
+      <option name="MODE" value="specific_activity" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="false" />
+      <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
+      <option name="FORCE_STOP_RUNNING_APP" value="true" />
+      <option name="TARGET_SELECTION_MODE" value="DEVICE_AND_SNAPSHOT_COMBO_BOX" />
+      <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="-1" />
+      <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
+      <option name="DEBUGGER_TYPE" value="Auto" />
+      <Auto>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+      </Auto>
+      <Hybrid>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+      </Hybrid>
+      <Java />
+      <Native>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+      </Native>
+      <Profilers>
+        <option name="ADVANCED_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_CPU_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_CPU_PROFILING_CONFIGURATION_NAME" value="Sample Java Methods" />
+        <option name="STARTUP_NATIVE_MEMORY_PROFILING_ENABLED" value="false" />
+        <option name="NATIVE_MEMORY_SAMPLE_RATE_BYTES" value="2048" />
+      </Profilers>
+      <option name="DEEP_LINK" value="" />
+      <option name="ACTIVITY_CLASS" value="com.example.geofencing.MainActivity" />
+      <option name="SEARCH_ACTIVITY_IN_GLOBAL_SCOPE" value="false" />
+      <option name="SKIP_ACTIVITY_VALIDATION" value="false" />
       <method v="2">
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
       </method>
@@ -118,6 +197,11 @@
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
       </method>
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Android App.MainActivity" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -133,9 +217,10 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
-    <state x="2303" y="268" key="#Console" timestamp="1645230838402">
-      <screen x="1920" y="0" width="1920" height="1040" />
+    <state x="383" y="278" key="#Console" timestamp="1652537669819">
+      <screen x="0" y="0" width="1920" height="1080" />
     </state>
+    <state x="383" y="278" key="#Console/-1920.0.1920.1080/1920.0.1920.1040/0.0.1920.1080@0.0.1920.1080" timestamp="1652537669819" />
     <state x="2303" y="268" key="#Console/0.0.1920.1080/1920.0.1920.1040@1920.0.1920.1040" timestamp="1645230838402" />
     <state x="765" y="246" key="#com.intellij.ide.util.MemberChooser" timestamp="1647353894105">
       <screen x="0" y="0" width="1920" height="1080" />
@@ -157,38 +242,44 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="804" y="329" key="AndroidCreateXmlResourceDialog/0.0.1920.1080/1920.0.1920.1040@0.0.1920.1080" timestamp="1645541178764" />
-    <state x="740" y="294" key="FileChooserDialogImpl" timestamp="1649588870159">
+    <state x="740" y="294" key="FileChooserDialogImpl" timestamp="1652989806416">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="740" y="294" key="FileChooserDialogImpl/-1920.0.1920.1080/1920.0.1920.1040/0.0.1920.1080@0.0.1920.1080" timestamp="1649588870159" />
+    <state x="740" y="294" key="FileChooserDialogImpl/-1920.0.1920.1080/1920.0.1920.1040/0.0.1920.1080@0.0.1920.1080" timestamp="1652989806416" />
     <state x="740" y="294" key="FileChooserDialogImpl/0.0.1920.1080/1920.0.1920.1040@0.0.1920.1080" timestamp="1645571978023" />
-    <state width="1876" height="273" key="GridCell.Tab.0.bottom" timestamp="1647356544672">
+    <state width="1877" height="185" key="GridCell.Tab.0.bottom" timestamp="1652988665304">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
+    <state width="1877" height="185" key="GridCell.Tab.0.bottom/-1920.0.1920.1080/1920.0.1920.1040/0.0.1920.1080@0.0.1920.1080" timestamp="1652988665304" />
     <state width="1876" height="273" key="GridCell.Tab.0.bottom/0.0.1920.1080/1920.0.1920.1040@0.0.1920.1080" timestamp="1647356544672" />
     <state width="1271" height="396" key="GridCell.Tab.0.bottom/0.0.1920.1080/1920.0.1920.1040@1920.0.1920.1040" timestamp="1645230764836" />
-    <state width="1876" height="273" key="GridCell.Tab.0.center" timestamp="1647356544672">
+    <state width="1877" height="185" key="GridCell.Tab.0.center" timestamp="1652988665304">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
+    <state width="1877" height="185" key="GridCell.Tab.0.center/-1920.0.1920.1080/1920.0.1920.1040/0.0.1920.1080@0.0.1920.1080" timestamp="1652988665304" />
     <state width="1876" height="273" key="GridCell.Tab.0.center/0.0.1920.1080/1920.0.1920.1040@0.0.1920.1080" timestamp="1647356544672" />
     <state width="1271" height="396" key="GridCell.Tab.0.center/0.0.1920.1080/1920.0.1920.1040@1920.0.1920.1040" timestamp="1645230764836" />
-    <state width="1876" height="273" key="GridCell.Tab.0.left" timestamp="1647356544672">
+    <state width="1877" height="185" key="GridCell.Tab.0.left" timestamp="1652988665304">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
+    <state width="1877" height="185" key="GridCell.Tab.0.left/-1920.0.1920.1080/1920.0.1920.1040/0.0.1920.1080@0.0.1920.1080" timestamp="1652988665304" />
     <state width="1876" height="273" key="GridCell.Tab.0.left/0.0.1920.1080/1920.0.1920.1040@0.0.1920.1080" timestamp="1647356544672" />
     <state width="1271" height="396" key="GridCell.Tab.0.left/0.0.1920.1080/1920.0.1920.1040@1920.0.1920.1040" timestamp="1645230764836" />
-    <state width="1876" height="273" key="GridCell.Tab.0.right" timestamp="1647356544672">
+    <state width="1877" height="185" key="GridCell.Tab.0.right" timestamp="1652988665304">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
+    <state width="1877" height="185" key="GridCell.Tab.0.right/-1920.0.1920.1080/1920.0.1920.1040/0.0.1920.1080@0.0.1920.1080" timestamp="1652988665304" />
     <state width="1876" height="273" key="GridCell.Tab.0.right/0.0.1920.1080/1920.0.1920.1040@0.0.1920.1080" timestamp="1647356544672" />
     <state width="1271" height="396" key="GridCell.Tab.0.right/0.0.1920.1080/1920.0.1920.1040@1920.0.1920.1040" timestamp="1645230764836" />
-    <state x="461" y="184" key="SettingsEditor" timestamp="1645533800191">
+    <state x="461" y="184" key="SettingsEditor" timestamp="1652537461825">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
+    <state x="461" y="184" key="SettingsEditor/-1920.0.1920.1080/1920.0.1920.1040/0.0.1920.1080@0.0.1920.1080" timestamp="1652537461825" />
     <state x="461" y="184" key="SettingsEditor/0.0.1920.1080/1920.0.1920.1040@0.0.1920.1080" timestamp="1645533800191" />
-    <state x="475" y="232" width="1058" height="770" key="find.popup" timestamp="1647356305612">
+    <state x="261" y="207" width="1058" height="770" key="find.popup" timestamp="1652990864019">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
+    <state x="261" y="207" width="1058" height="770" key="find.popup/-1920.0.1920.1080/1920.0.1920.1040/0.0.1920.1080@0.0.1920.1080" timestamp="1652990864019" />
     <state x="475" y="232" width="1058" height="770" key="find.popup/0.0.1920.1080/1920.0.1920.1040@0.0.1920.1080" timestamp="1647356305612" />
     <state x="2587" y="266" width="585" height="534" key="find.popup/0.0.1920.1080/1920.0.1920.1040@1920.0.1920.1040" timestamp="1645203317744" />
     <state width="436" height="94" key="javadoc.popup.new" timestamp="1647356572489">

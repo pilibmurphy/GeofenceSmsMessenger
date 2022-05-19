@@ -11,6 +11,7 @@ import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -19,6 +20,7 @@ import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.Toast;
 
+import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.Geofence;
 import com.google.android.gms.location.GeofencingClient;
 import com.google.android.gms.location.GeofencingRequest;
@@ -46,6 +48,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private SeekBar sk;
     private String fenceID;
     private float geofenceRadius = 200;
+    private FusedLocationProviderClient fusedLocationProviderClient;
 
     private static final int REQUEST_CODE = 10001;
     private final int FINE_LOCATION_ACCESS_REQUEST_CODE = 10002;
@@ -63,6 +66,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         geofenceHelper = new GeofenceHelper(this);
         fenceID = getIntent().getStringExtra("fenceID");
         Log.e(TAG, "fenceid:" + fenceID);
+        getUserLocation();
         seekbarRadius();
         screenElements();
     }
@@ -89,26 +93,44 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
     }
 
-    //todo we need to add these to the main activity and split it into two so that both the permissions are gained in one sitting
+    private void getUserLocation(){
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
+        if (ActivityCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
+        fusedLocationProviderClient.getLastLocation()
+                .addOnSuccessListener(this, new OnSuccessListener<Location>() {
+                    @Override
+                    public void onSuccess(Location location) {
+                        // Got last known location. In some rare situations this can be null.
+                        if (location != null) {
+                            final LatLng t = new LatLng(location.getLatitude(), location.getLongitude());
+                            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(t, 14));
+                        }
+                    }
+                });
+    }
+
 
     private void enableTextMessages(){
-        if ((ContextCompat.checkSelfPermission(this, Manifest.permission.READ_SMS) +
-                ContextCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS))
+        if ((ContextCompat.checkSelfPermission(this, Manifest.permission.READ_SMS) + ContextCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS))
                 != PackageManager.PERMISSION_GRANTED) {
-
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this,Manifest.permission.READ_SMS) ||
+            // should get both permission pop ups at the same time now
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,Manifest.permission.READ_SMS) &&
                     ActivityCompat.shouldShowRequestPermissionRationale(this,Manifest.permission.READ_SMS)) {
-                Log.e("phil", "one");
+                Log.e("Permissions", "one");
 
             } else {
                 ActivityCompat.requestPermissions(this, new String[]{ Manifest.permission.READ_SMS, Manifest.permission.SEND_SMS}, REQUEST_CODE);
-                Log.e("phil", "two");
+                Log.e("Permissions", "two");
             }
         }
 
         else {
-            // Permission has already been granted
-            Log.e("phil", "three");
+            // Permissions has already been granted
+            Log.e("Permissions", "three");
         }
     }
 
@@ -164,6 +186,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         } else {
             handleMapLongClick(latLng);
             mLatlng = latLng;
+            sk.setVisibility(View.VISIBLE);
 
         }
 
@@ -190,21 +213,23 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 mMap.clear();
                 mMap.addCircle(circleOptions);
 
-                Toast.makeText(getApplicationContext(), String.valueOf(progress),Toast.LENGTH_LONG).show();
+                // Lose the animation and put this in the onStopTrackingTouch? Can look glitchy
+                //just to show what the radius is
+                //Toast.makeText(getApplicationContext(), String.valueOf(progress),Toast.LENGTH_LONG).show();
 
             }
         });
+        sk.setVisibility(View.INVISIBLE);
     }
 
     private void handleMapLongClick(LatLng latLng) {
         Log.d("testing", "creating the geofence");
         mMap.clear();
-        sk.setVisibility(View.VISIBLE);
         sk.setProgress(0);
         addMarker(latLng);
         addCircle(latLng, geofenceRadius);
         // do some shit before this is added
-        //addGeofence(latLng, GEOFENCE_RADIUS);
+        // addGeofence(latLng, GEOFENCE_RADIUS);
     }
 
     //todo add a save button
@@ -215,19 +240,24 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private void addGeofence(LatLng latLng, float radius) {
 
-        //todo Add this to a public list of geo fence items? compare the id then and extract the message.
-        String num = "+447757822458";
-        String msg = "Android Test 2";
-
+        //todo - need to pick what transition types that I should add here
+        //todo - I need to remove the fence ID here, just setting it for testing
+        Log.e(TAG, "adding:" + fenceID);
+        //fenceID = "newtest";
         Geofence geofence = geofenceHelper.getGeofence(fenceID, latLng, radius, Geofence.GEOFENCE_TRANSITION_ENTER | Geofence.GEOFENCE_TRANSITION_DWELL | Geofence.GEOFENCE_TRANSITION_EXIT);
+        Log.e(TAG, "created fence");
         GeofencingRequest geofencingRequest = geofenceHelper.getGeofencingRequest(geofence);
+        Log.e(TAG, "created request ");
         PendingIntent pendingIntent = geofenceHelper.getPendingIntent();
+        Log.e(TAG, "intent returned ");
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            Log.e(TAG, "Missing some permission that are messing with creating the listener");
             // TODO: Consider calling
             //    ActivityCompat#requestPermissions
-            return;
+            //return;
         }
+        Log.e(TAG, "creating listener ");
         geofencingClient.addGeofences(geofencingRequest, pendingIntent)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
@@ -239,9 +269,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         String errorMessage = geofenceHelper.getErrorString(e);
-                        Log.d(TAG, "onFailure: " + errorMessage);
+                        Log.e(TAG, "onFailure: " + errorMessage);
                     }
                 });
+        //todo - figure out how to use geofencingClient to unreg all of the fences to be deleted.
+        Log.e(TAG, "created listener ");
     }
 
     private void addMarker(LatLng latLng) {
@@ -250,12 +282,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
 
-    //okay I can make circle options problic and then update the radios from there
+    //okay I can make circle options public and then update the radios from there
     //the seekbar might do this in a smooth fashion but I really don't mind if it doesn't
     private void addCircle(LatLng latLng, float radius) {
         circleOptions.center(latLng);
         circleOptions.radius(radius);
-        circleOptions.strokeColor(Color.argb(255, 255, 0,0));
+        circleOptions.strokeColor(Color.argb(255, 255, 255,255));
         circleOptions.fillColor(Color.argb(64, 0, 0,255));
         circleOptions.strokeWidth(8);
         mMap.addCircle(circleOptions);
@@ -263,14 +295,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private void save() {
         addGeofence(mLatlng, geofenceRadius);
+        Intent intent = new Intent(MapsActivity.this, MainActivity.class);
+        //MapsActivity.this.startActivity(intent);
     }
 
     private void screenElements(){
         findViewById(R.id.button_map_save).setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 save();
-                Intent intent = new Intent(MapsActivity.this, MainActivity.class);
-                MapsActivity.this.startActivity(intent);
             }
         });
     }

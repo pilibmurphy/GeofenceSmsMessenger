@@ -36,9 +36,12 @@ public class GeofenceDetails {
         this.fenceId = fenceId;
     }
 
-    //todo will also need to identify transition types
-    //todo will need to make phone numbers a list instead
-    //todo somehow filter messages and make sure they don't crash the application
+    //todo
+    //  will also need to identify transition types
+    //  will need to make phone numbers a list instead
+    //  Add the lat/lng and radius so that we can draw a map showing all the currently active fences
+    //  somehow filter messages and make sure they don't crash the application
+
 
     public String getFenceId() {
         return fenceId;
@@ -114,4 +117,6 @@ public class GeofenceDetails {
 
     public void delete(){
     }
+
+    //todo store the latlng and the radius so we can see all of them on the map.
 }
